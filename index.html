@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>bunwichtig · Projekte</title>
+<meta name="description" content="Übersicht meiner Projekte: Natur-Apps, Web-Experimente und mehr.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f4f1ea; --surface:#fffdf8; --ink:#1f2a22; --muted:#5d6b60;
+    --line:#ddd6c8; --accent:#2f6b45; --accent-soft:#e3eee5; --chip:#efe9dc;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#121714; --surface:#1a211c; --ink:#e8ede6; --muted:#9aa89d;
+      --line:#2c362f; --accent:#7fc596; --accent-soft:#1f3326; --chip:#232c25;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#121714; --surface:#1a211c; --ink:#e8ede6; --muted:#9aa89d;
+    --line:#2c362f; --accent:#7fc596; --accent-soft:#1f3326; --chip:#232c25;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+  header{padding:72px 0 40px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(40px,7vw,68px);line-height:1.02;margin:12px 0 16px;letter-spacing:-.02em}
+  .lead{max-width:600px;color:var(--muted);font-size:18px;margin:0}
+  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0 24px}
+  .filter{border:1px solid var(--line);background:transparent;color:var(--ink);padding:7px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer}
+  .filter[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding-bottom:64px}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 30px -16px rgba(0,0,0,.35)}
+  .cover{aspect-ratio:16/9;display:grid;place-items:center;font-size:56px;position:relative}
+  .cover .status{position:absolute;top:12px;left:12px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--surface);color:var(--ink)}
+  .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
+  h2{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:26px;margin:0;line-height:1.15}
+  .body p{margin:0;color:var(--muted);font-size:15px}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+  .tag{font-size:12px;background:var(--chip);padding:3px 9px;border-radius:6px;color:var(--muted)}
+  .links{display:flex;gap:10px;margin-top:auto;padding-top:12px}
+  .btn{text-decoration:none;font-size:14px;font-weight:600;padding:9px 16px;border-radius:10px;border:1px solid var(--line)}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+  .btn:hover{filter:brightness(1.07)}
+  footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  .theme{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
+  .empty{color:var(--muted);grid-column:1/-1}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">bunwichtig</div>
+    <h1>Projekte &amp; Experimente</h1>
+    <p class="lead">Natur, Fotografie und Web. Hier sammle ich, woran ich gerade baue – meist reines HTML und JavaScript, mit Daten aus offenen Quellen.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="toolbar" id="filters" role="group" aria-label="Filter"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer class="wrap">
+  <span>© <span id="year"></span> bunwichtig · <a href="https://github.com/bunwichtig">GitHub</a></span>
+  <button class="theme" id="theme" type="button">Hell / Dunkel</button>
+</footer>
+
+<script>
+/* ── Projekte hier pflegen ──────────────────────────────
+   Neues Projekt = neuer Eintrag. Felder:
+   title, text, emoji, color (Hintergrund der Kachel),
+   status, tags, live (Link zur Seite), repo (GitHub-Link)  */
+const PROJECTS = [
+  {
+    title: "Pure Nature",
+    text: "Drehbarer 3D-Globus, der zeigt, welche Pflanzen, Tiere und Pilze im sichtbaren Ausschnitt vorkommen. Mit Steckbriefen und Pflanzenbestimmung per Handy-Foto. Speichert nichts selbst – alles live aus freien APIs.",
+    emoji: "🌍",
+    color: "linear-gradient(135deg,#2f6b45,#7fb6a0)",
+    status: "In Arbeit",
+    tags: ["Globus", "GBIF", "iNaturalist", "Pl@ntNet", "Wissen"],
+    live: "https://bunwichtig.github.io/naturewissen/",
+    repo: "https://github.com/bunwichtig/naturewissen"
+  },
+  {
+    title: "Nature – BioDex MMO",
+    text: "Prototyp eines Natur-Foto-Spiels: Tiere und Pflanzen fotografieren, bestimmen lassen, im Natur-Kodex sammeln, Medaillen freischalten und Funde anderer im Community-Hub bestätigen.",
+    emoji: "📸",
+    color: "linear-gradient(135deg,#c98b3a,#e9c98f)",
+    status: "Prototyp",
+    tags: ["Spiel", "Fotografie", "Tailwind"],
+    live: "https://bunwichtig.github.io/nature/",
+    repo: "https://github.com/bunwichtig/nature"
+  }
+];
+/* ─────────────────────────────────────────────────────── */
+
+const grid = document.getElementById('grid');
+const filters = document.getElementById('filters');
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let active = 'Alle';
+
+function render(){
+  const list = active === 'Alle' ? PROJECTS : PROJECTS.filter(p => p.tags.includes(active));
+  grid.innerHTML = list.length ? list.map(p => `
+    <article class="card">
+      <div class="cover" style="background:${p.color}"><span class="status">${esc(p.status)}</span><span aria-hidden="true">${p.emoji}</span></div>
+      <div class="body">
+        <h2>${esc(p.title)}</h2>
+        <p>${esc(p.text)}</p>
+        <div class="tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
+        <div class="links">
+          ${p.live ? `<a class="btn primary" href="${p.live}">Ansehen</a>` : ''}
+          ${p.repo ? `<a class="btn" href="${p.repo}">Code</a>` : ''}
+        </div>
+      </div>
+    </article>`).join('') : '<p class="empty">Keine Projekte mit diesem Schlagwort.</p>';
+}
+
+function renderFilters(){
+  const tags = ['Alle', ...new Set(PROJECTS.flatMap(p => p.tags))];
+  filters.innerHTML = tags.map(t => `<button class="filter" type="button" aria-pressed="${t===active}">${esc(t)}</button>`).join('');
+  filters.querySelectorAll('button').forEach(b => b.onclick = () => { active = b.textContent; renderFilters(); render(); });
+}
+
+renderFilters(); render();
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const root = document.documentElement;
+try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch(e){}
+document.getElementById('theme').onclick = () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch(e){}
+};
+</script>
+</body>
+</html>
