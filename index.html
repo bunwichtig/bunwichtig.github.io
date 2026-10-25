@@ -29,7 +29,7 @@ a{color:inherit;text-decoration:none}
 /* Kopf */
 nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;border-bottom:1px solid var(--ink)}
 .logo{display:flex;align-items:center;gap:10px}
-.logo i{font:italic 400 24px/1 var(--f-disp);width:32px;height:32px;display:grid;place-items:center;background:var(--ink);color:var(--inv);border-radius:6px;font-style:italic}
+.logo i{display:none;font:italic 400 24px/1 var(--f-disp);width:32px;height:32px;display:grid;place-items:center;background:var(--ink);color:var(--inv);border-radius:6px;font-style:italic}
 .nav-r{display:flex;gap:26px;color:var(--mut)}
 .nav-r a:hover{color:var(--ink)}
 
@@ -67,9 +67,14 @@ h1 em{color:var(--acc)}
 
 .list{border-bottom:1px solid var(--line);margin-bottom:8px}
 .p{position:relative;padding:28px 0;border-top:1px solid var(--line);transition:background .25s,color .25s,padding .25s}
-.p:hover{background:var(--ink);color:var(--inv);padding-left:20px;padding-right:20px;margin:0 -20px}
-.p:hover .desc,.p:hover .num,.p:hover .meta{color:color-mix(in srgb,var(--inv) 72%,var(--ink))}
+.p:hover{background:var(--soft)}
+.p:hover .go{transform:translateX(4px)}
+.go{transition:transform .2s}
+.p:first-child{background:var(--ink);color:var(--inv);margin:0 calc(-1*clamp(16px,4vw,40px));padding-left:clamp(16px,4vw,40px);padding-right:clamp(16px,4vw,40px);border-top-color:var(--ink)}
+.p:first-child .desc,.p:first-child .num,.p:first-child .meta{color:color-mix(in srgb,var(--inv) 70%,var(--ink))}
+.p:first-child .meta .st{color:var(--inv)}
 .num{font:var(--disp-w) 40px/1 var(--f-disp);color:var(--mut)}
+.p h2 em{font-style:italic}
 .p h2{font:var(--disp-w) clamp(34px,3.8vw,48px)/1 var(--f-disp);letter-spacing:-.01em;margin:0}
 .desc{margin:0;color:var(--mut);font-size:15px}
 .meta{color:var(--ink);font-size:11px;line-height:1.9}
@@ -90,7 +95,6 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   .hero{grid-template-columns:1fr;gap:20px}
   .head{display:none}
   .p,[data-skin="kalk"] .p{grid-template-columns:48px 1fr 28px;gap:8px 14px;padding:24px 0}
-  .p:hover{margin:0 -12px;padding-left:12px;padding-right:12px}
   .num{font-size:30px;grid-row:1}
   .p h2{grid-column:2;grid-row:1}
   .go{grid-column:3;grid-row:1}
@@ -110,14 +114,14 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 <body>
 <div class="wrap">
   <nav>
-    <a class="logo mono" href="./"><i>b</i>bunwichtig</a>
+    <a class="logo mono" href="./">bunwichtig — Werkverzeichnis</a>
     <div class="nav-r mono"><a class="opt" href="#projekte">Projekte</a><a href="https://github.com/bunwichtig">GitHub ↗</a></div>
   </nav>
 
   <div class="views" role="group" aria-label="Ansicht wählen">
     <span class="lbl mono">Ansicht</span>
     <div class="opts">
-      <button type="button" data-s="papier"><span class="sw sw-papier"></span>Papier</button>
+      <button type="button" data-s="papier"><span class="sw sw-papier"></span>Feldbuch</button>
       <button type="button" data-s="nacht"><span class="sw sw-nacht"></span>Nacht</button>
       <button type="button" data-s="kalk"><span class="sw sw-kalk"></span>Kalk</button>
     </div>
@@ -143,7 +147,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 <script>
 /* ── Projekte hier pflegen ──────────────────────────────
    Neues Projekt = neuer Eintrag. Felder:
-   title, text, color (Punkt beim Stand), art (Bild in Ansicht „Kalk“: walk | map | cam | leaf),
+   title, em (kursiver Teil des Namens, optional), text, color (Punkt beim Stand), art (Bild in Ansicht „Kalk“: walk | map | cam | leaf),
    status, tags, live (Link zur Seite), repo (GitHub-Link)  */
 const PROJECTS = [
   {
@@ -167,7 +171,8 @@ const PROJECTS = [
     repo: "https://github.com/bunwichtig/naturewissen"
   },
   {
-    title: "Nature – BioDex",
+    title: "Nature BioDex",
+    em: "BioDex",
     text: "Prototyp eines Natur-Foto-Spiels: Tiere und Pflanzen fotografieren, bestimmen lassen, im Natur-Kodex sammeln und Medaillen freischalten.",
     color: "#b0703a",
     art: "cam",
@@ -192,7 +197,7 @@ document.getElementById('projekte').innerHTML = PROJECTS.map((p, i) => `
     ${p.live ? `<a class="cover" href="${esc(p.live)}" aria-label="${esc(p.title)} ansehen"></a>` : ''}
     <span class="num">${String(i + 1).padStart(2, '0')}</span>
     <div class="thumb" aria-hidden="true">${ART[p.art] || ART.leaf}</div>
-    <h2>${esc(p.title)}</h2>
+    <h2>${p.em ? esc(p.title).replace(esc(p.em), `<em>${esc(p.em)}</em>`) : esc(p.title)}</h2>
     <p class="desc">${esc(p.text)}</p>
     <div class="meta mono"><span class="st">${esc(p.status)}</span><br>${p.tags.map(esc).join(' · ')}${p.repo ? `<br><a class="code" href="${esc(p.repo)}">Code ↗</a>` : ''}</div>
     <span class="go" aria-hidden="true">→</span>

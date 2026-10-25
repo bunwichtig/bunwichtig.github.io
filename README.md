@@ -21,7 +21,7 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
 
 ## Ansichten
 
-Oben rechts gibt es drei Ansichten zum Umschalten: **Papier** (Standard), **Nacht** und **Kalk**.
+Oben rechts gibt es drei Ansichten zum Umschalten: **Feldbuch** (Standard), **Nacht** und **Kalk**.
 Sie unterscheiden sich nur in Farben und Schrift; die Wahl merkt sich der Browser.
 
 ## Veröffentlichen
