@@ -11,7 +11,7 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
   title: "Name",
   text: "Kurze Beschreibung",
   color: "#16a34a",          // Projektfarbe
-  art: "leaf",               // Bildmotiv: walk | map | cam | leaf
+  art: "leaf",               // Bild in Ansicht „Kalk“: walk | map | cam | leaf
   status: "In Arbeit",
   tags: ["Schlagwort"],
   live: "https://bunwichtig.github.io/repo-name/",
@@ -19,10 +19,10 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
 }
 ```
 
-## Designs
+## Ansichten
 
-Oben rechts gibt es drei Designs zum Umschalten: **Feldbuch** (Standard), **Neon** und **Bunt**.
-Die Wahl merkt sich der Browser. Alle drei nutzen dieselbe Projektliste.
+Oben rechts gibt es drei Ansichten zum Umschalten: **Papier** (Standard), **Nacht** und **Kalk**.
+Sie unterscheiden sich nur in Farben und Schrift; die Wahl merkt sich der Browser.
 
 ## Veröffentlichen
 
