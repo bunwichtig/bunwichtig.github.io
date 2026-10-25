@@ -207,7 +207,7 @@ nav,.views{position:relative;z-index:2}
 <script>
 /* ── Projekte hier pflegen ──────────────────────────────
    Neues Projekt = neuer Eintrag. Felder:
-   title, em (kursiver Teil des Namens, optional), text, color (Punkt beim Stand), art (Bild in „Kalk“ und den plastischen Ansichten: walk | map | cam | star | leaf),
+   title, em (kursiver Teil des Namens, optional), text, color (Punkt beim Stand), art (Bild in „Kalk“ und den plastischen Ansichten: walk | map | cam | signal | leaf),
    status, tags, live (Link zur Seite), repo (GitHub-Link),
    natur: true  → steht immer oben (Reihenfolge sonst wie hier)
    Ohne live-Link gilt ein Projekt als „noch nicht verfügbar“ (blasser, nicht anklickbar).  */
@@ -250,7 +250,7 @@ const PROJECTS = [
     em: "Signal",
     text: "Von weit draußen kommt etwas herein. Was es ist, wird noch nicht verraten.",
     color: "#8a8f99",
-    art: "star",
+    art: "signal",
     status: "Geplant",
     tags: ["Bald", "Geheim"],
     live: "",
@@ -264,7 +264,7 @@ const ART = {
   walk: '<svg viewBox="0 0 120 84" fill="none" stroke-width="1"><path class="a" d="M0 60 C25 50 45 56 60 48 S95 40 120 46"/><path class="a" d="M0 68 C25 58 47 63 62 56 S96 49 120 54"/><path class="a" d="M0 76 C25 67 50 70 64 64 S97 58 120 62"/><path class="i" d="M50 48 h14 v-9 h-14z M48 40 l9-7 l9 7"/><path class="i" d="M70 58 l14 2" stroke-width="2"/></svg>',
   map:  '<svg viewBox="0 0 120 84" fill="none"><circle class="a" cx="60" cy="42" r="10"/><circle class="a" cx="60" cy="42" r="22" stroke-opacity=".6"/><circle class="a" cx="60" cy="42" r="34" stroke-opacity=".3"/><circle class="f" cx="60" cy="42" r="3"/></svg>',
   cam:  '<svg viewBox="0 0 120 84" fill="none" stroke-width="1.2"><path class="i" d="M42 26 h-8 v8 M78 26 h8 v8 M42 58 h-8 v-8 M78 58 h8 v-8"/><circle class="a" cx="60" cy="42" r="8"/><circle class="f" cx="60" cy="42" r="2"/></svg>',
-  star: '<svg viewBox="0 0 120 84" fill="none"><g class="f" fill-opacity=".55"><circle cx="22" cy="18" r="1.2"/><circle cx="96" cy="14" r="1"/><circle cx="104" cy="62" r="1.3"/><circle cx="14" cy="64" r="1"/><circle cx="70" cy="10" r=".9"/></g><path class="a" d="M60 18 L72 64 L60 55 L48 64 Z" stroke-width="1.3"/><ellipse class="i" cx="60" cy="46" rx="36" ry="9" stroke-opacity=".35"/></svg>',
+  signal: '<svg viewBox="0 0 120 84" fill="none" stroke-linecap="round"><circle class="f" cx="40" cy="42" r="2.6"/><path class="a" d="M47 34 A11 11 0 0 1 47 50" stroke-width="1.3"/><path class="a" d="M54 26 A22 22 0 0 1 54 58" stroke-width="1.2" stroke-opacity=".7"/><path class="a" d="M61 18 A33 33 0 0 1 61 66" stroke-width="1.1" stroke-opacity=".45"/><path class="a" d="M68 10 A44 44 0 0 1 68 74" stroke-opacity=".25"/></svg>',
   leaf: '<svg viewBox="0 0 120 84" fill="none"><path class="a" d="M60 70 C60 46 46 32 32 28 C52 24 60 38 60 52 C60 38 74 22 92 24 C78 32 60 46 60 70Z"/></svg>'
 };
 
