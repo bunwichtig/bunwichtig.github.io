@@ -109,14 +109,10 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 .hint:hover,.hint:focus-visible{opacity:.7}
 
 /* ===== Plastisch (Moos, Ton, Tiefsee) ===== */
-.orb{display:none}
 .plast nav{border-bottom-color:var(--line)}
 nav,.views{position:relative;z-index:2}
 .plast .hero{position:relative;border-bottom:0}
 .plast .hero>*{position:relative;z-index:1}
-.plast .orb{display:block;position:absolute;right:-3%;top:4%;width:min(240px,22vw);aspect-ratio:1;border-radius:50%;z-index:0;
-  background:radial-gradient(circle at 34% 28%,var(--hi),transparent 38%),radial-gradient(circle at 50% 50%,color-mix(in srgb,var(--acc) 38%,var(--card)) 0%,color-mix(in srgb,var(--acc) 70%,var(--bg)) 100%);
-  box-shadow:0 40px 80px -30px var(--sh),inset -20px -30px 60px rgba(0,0,0,.18);opacity:.5}
 .plast h1{text-shadow:0 1px 0 var(--hi),0 10px 30px var(--sh2)}
 .plast .head{display:none}
 .plast .list{border:0;display:flex;flex-direction:column;gap:18px;padding:10px 0 20px}
@@ -154,8 +150,7 @@ nav,.views{position:relative;z-index:2}
   .go{grid-column:3;grid-row:1}
   .desc,.meta,.thumb{grid-column:2/4}
   [data-skin="kalk"] .thumb,.plast .thumb{width:100%;height:120px;grid-row:2}
-  .plast .orb{display:none}
-  .nav-r .opt{display:none}
+  .plast   .nav-r .opt{display:none}
 }
 @media (max-width:520px){
   .views{justify-content:flex-start}
@@ -193,7 +188,6 @@ nav,.views{position:relative;z-index:2}
   </div>
 
   <header class="hero">
-    <div class="orb" aria-hidden="true"></div>
     <h1>Feldnotizen<br>aus dem <em>Browser.</em></h1>
     <div>
       <p>Kleine Webprojekte über Natur und Landschaft – gebaut mit HTML, JavaScript und offenen Daten. Kein Server, keine Datenbank, alles nachvollziehbar.</p>
