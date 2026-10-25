@@ -10,8 +10,8 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
 {
   title: "Name",
   text: "Kurze Beschreibung",
-  emoji: "🌱",
-  color: "linear-gradient(135deg,#2f6b45,#7fb6a0)",
+  color: "#16a34a",          // Projektfarbe
+  art: "leaf",               // Bildmotiv: walk | map | cam | leaf
   status: "In Arbeit",
   tags: ["Schlagwort"],
   live: "https://bunwichtig.github.io/repo-name/",
@@ -19,7 +19,10 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
 }
 ```
 
-Die Filter-Buttons entstehen automatisch aus den Tags.
+## Designs
+
+Oben rechts gibt es drei Designs zum Umschalten: **Feldbuch** (Standard), **Neon** und **Bunt**.
+Die Wahl merkt sich der Browser. Alle drei nutzen dieselbe Projektliste.
 
 ## Veröffentlichen
 

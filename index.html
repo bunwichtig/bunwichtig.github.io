@@ -1,156 +1,301 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-skin="feld">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>bunwichtig · Projekte</title>
-<meta name="description" content="Übersicht meiner Projekte: Natur-Apps, Web-Experimente und mehr.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🌿%3C/text%3E%3C/svg%3E">
+<meta name="description" content="Kleine Webprojekte über Natur und Landschaft – HTML, JavaScript und offene Daten.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='26' fill='%23ff4d2e'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' font-family='Georgia' font-style='italic' fill='%23fff'%3Eb%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<script>try{var s=localStorage.getItem('skin');if(s)document.documentElement.dataset.skin=s}catch(e){}</script>
 <style>
-  :root{
-    --bg:#f4f1ea; --surface:#fffdf8; --ink:#1f2a22; --muted:#5d6b60;
-    --line:#ddd6c8; --accent:#2f6b45; --accent-soft:#e3eee5; --chip:#efe9dc;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#121714; --surface:#1a211c; --ink:#e8ede6; --muted:#9aa89d;
-      --line:#2c362f; --accent:#7fc596; --accent-soft:#1f3326; --chip:#232c25;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#121714; --surface:#1a211c; --ink:#e8ede6; --muted:#9aa89d;
-    --line:#2c362f; --accent:#7fc596; --accent-soft:#1f3326; --chip:#232c25;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
-  a{color:inherit}
-  .wrap{max-width:1040px;margin:0 auto;padding:0 16px}
-  header{padding:72px 0 40px;border-bottom:1px solid var(--line)}
-  .kicker{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);font-weight:600}
-  h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(40px,7vw,68px);line-height:1.02;margin:12px 0 16px;letter-spacing:-.02em}
-  .lead{max-width:600px;color:var(--muted);font-size:18px;margin:0}
-  .toolbar{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0 24px}
-  .filter{border:1px solid var(--line);background:transparent;color:var(--ink);padding:7px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer}
-  .filter[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;padding-bottom:64px}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
-  .card:hover{transform:translateY(-3px);box-shadow:0 12px 30px -16px rgba(0,0,0,.35)}
-  .cover{aspect-ratio:16/9;display:grid;place-items:center;font-size:56px;position:relative}
-  .cover .status{position:absolute;top:12px;left:12px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--surface);color:var(--ink)}
-  .body{padding:20px 22px 22px;display:flex;flex-direction:column;gap:10px;flex:1}
-  h2{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:26px;margin:0;line-height:1.15}
-  .body p{margin:0;color:var(--muted);font-size:15px}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
-  .tag{font-size:12px;background:var(--chip);padding:3px 9px;border-radius:6px;color:var(--muted)}
-  .links{display:flex;gap:10px;margin-top:auto;padding-top:12px}
-  .btn{text-decoration:none;font-size:14px;font-weight:600;padding:9px 16px;border-radius:10px;border:1px solid var(--line)}
-  .btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
-  .btn:hover{filter:brightness(1.07)}
-  footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-  .theme{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
-  .empty{color:var(--muted);grid-column:1/-1}
-  .hint{color:var(--muted);text-decoration:none;opacity:.12;margin-right:10px;font-size:12px;transition:opacity .3s}
-  .hint:hover,.hint:focus-visible{opacity:.7}
+/* ===== Basis ===== */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.55 var(--f-body);-webkit-font-smoothing:antialiased;transition:background .3s,color .3s;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,40px);position:relative}
+nav{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:22px 0;position:relative;z-index:2}
+.logo{font-weight:700;letter-spacing:-.02em;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.nav-r{display:flex;align-items:center;gap:14px}
+.skins{display:flex;gap:2px;padding:3px;border-radius:99px;border:1px solid var(--line);background:var(--chip)}
+.skins button{all:unset;cursor:pointer;font:500 12px/1 var(--f-mono);padding:7px 11px;border-radius:99px;color:var(--mut);display:flex;align-items:center;gap:6px}
+.skins button i{width:9px;height:9px;border-radius:50%;display:block}
+.skins button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.skins button:focus-visible{outline:2px solid var(--acc)}
+.gh{font:500 13px var(--f-mono);color:var(--mut)}
+.hero{display:none;position:relative;z-index:1}
+.grid{position:relative;z-index:1}
+.p{position:relative}
+.links{display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;font-weight:600;font-size:14px}
+footer{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:28px 0 36px;color:var(--mut);font:500 12px var(--f-mono);position:relative;z-index:1}
+.hint{opacity:.12;margin-right:10px;transition:opacity .3s}
+.hint:hover,.hint:focus-visible{opacity:.7}
+.blobs{display:none}
+
+/* ===== Feldbuch (poppig, Standard) ===== */
+[data-skin="feld"]{--bg:#f6f0e4;--ink:#17140f;--mut:#71695c;--line:#ddd2bf;--chip:#efe6d4;--acc:#ff4d2e;--f-body:'Space Grotesk',sans-serif;--f-mono:'JetBrains Mono',monospace;--f-disp:'Instrument Serif',Georgia,serif}
+[data-skin="feld"] nav{border-bottom:2px solid var(--ink)}
+[data-skin="feld"] .logo{font:500 13px var(--f-mono);text-transform:uppercase;letter-spacing:.08em}
+[data-skin="feld"] .logo b{background:var(--acc);color:#fff;font:italic 22px/1 var(--f-disp);width:30px;height:30px;border-radius:50%;display:grid;place-items:center;text-transform:none;letter-spacing:0}
+[data-skin="feld"] .hero-feld{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:end;padding:clamp(40px,7vw,80px) 0 44px}
+.hero-feld h1{font:400 clamp(58px,10.5vw,138px)/.86 var(--f-disp);letter-spacing:-.03em;margin:0}
+.hero-feld h1 em{position:relative;white-space:nowrap;z-index:0}
+.hero-feld h1 em:before{content:"";position:absolute;left:-.06em;right:-.04em;bottom:.08em;height:.38em;background:#ffd23f;z-index:-1;transform:rotate(-1.5deg)}
+.hero-feld h1 .dot{color:var(--acc)}
+.hero-feld p{margin:0;color:var(--mut)}
+.stickers{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.stickers span{font:600 12px var(--f-mono);padding:6px 11px;border-radius:99px;border:2px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+.stickers span:nth-child(1){background:#ffd23f;transform:rotate(-3deg)}
+.stickers span:nth-child(2){background:#7cd4ff;transform:rotate(2deg)}
+.stickers span:nth-child(3){background:#ff8fb8;transform:rotate(-1deg)}
+.marquee{display:none;background:var(--ink);color:#f6f0e4;overflow:hidden;margin:0 calc(-1*clamp(16px,4vw,40px));position:relative;z-index:1}
+[data-skin="feld"] .marquee{display:block}
+.marquee div{display:flex;gap:36px;padding:12px 0;white-space:nowrap;font:500 13px var(--f-mono);text-transform:uppercase;letter-spacing:.1em;animation:run 32s linear infinite;width:max-content}
+.marquee b{color:#ffd23f;font-weight:500}
+@keyframes run{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.marquee div{animation:none}}
+[data-skin="feld"] .grid{padding:28px 0 20px}
+[data-skin="feld"] .p{display:grid;grid-template-columns:96px minmax(0,1fr) minmax(0,1.2fr) 190px 180px;gap:24px;align-items:center;padding:26px 18px;border-bottom:2px solid var(--line);border-radius:18px;transition:background .25s,color .25s,transform .25s}
+[data-skin="feld"] .p:hover{background:var(--c);color:#fff;border-color:transparent;transform:rotate(-.4deg)}
+[data-skin="feld"] .p:hover .desc,[data-skin="feld"] .p:hover .meta{color:#fff}
+[data-skin="feld"] .vis{display:none}
+[data-skin="feld"] .num{width:72px;height:72px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font:italic 34px var(--f-disp);border:2px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+[data-skin="feld"] .p:hover .num{background:#fff;color:var(--c)}
+[data-skin="feld"] h2{font:400 clamp(36px,4vw,50px)/1 var(--f-disp);margin:0;letter-spacing:-.01em}
+[data-skin="feld"] .desc{margin:0;color:var(--mut);font-size:15px}
+[data-skin="feld"] .meta{font:500 11.5px/1.9 var(--f-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--ink)}
+[data-skin="feld"] .meta .st{display:inline-block;background:var(--c);color:#fff;padding:2px 9px;border-radius:99px;margin-bottom:4px}
+[data-skin="feld"] .p:hover .meta .st{background:#fff;color:var(--c)}
+[data-skin="feld"] .links{justify-content:flex-end}
+[data-skin="feld"] .btn{padding:9px 14px;border-radius:99px;border:2px solid currentColor;font-size:13px}
+[data-skin="feld"] .btn.pr{background:var(--ink);color:#f6f0e4;border-color:var(--ink)}
+[data-skin="feld"] .p:hover .btn.pr{background:#fff;color:var(--c);border-color:#fff}
+[data-skin="feld"] footer{text-transform:uppercase;letter-spacing:.08em}
+
+/* ===== Neon ===== */
+[data-skin="neon"]{--bg:#0c0d0c;--ink:#f1f3ee;--mut:#8b928a;--line:#262a26;--chip:#151715;--acc:#d4ff3a;--f-body:'Space Grotesk',sans-serif;--f-mono:'JetBrains Mono',monospace}
+[data-skin="neon"] .logo{font-size:19px}
+[data-skin="neon"] .logo b{display:none}
+[data-skin="neon"] .logo:after{content:".";color:var(--acc);margin-left:-10px}
+[data-skin="neon"] .skins button[aria-pressed="true"]{background:var(--acc);color:#0c0d0c}
+[data-skin="neon"] .hero-neon{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:end;padding:clamp(40px,7vw,80px) 0 48px}
+.hero-neon h1{font-size:clamp(56px,9vw,108px);line-height:.9;letter-spacing:-.055em;margin:0;font-weight:700}
+.hero-neon h1 span{color:var(--acc)}
+.hero-neon p{color:var(--mut);font-size:17px;margin:0}
+.stat{display:flex;gap:28px;font:500 12px var(--f-mono);color:var(--mut);margin-top:20px}.stat b{display:block;color:var(--ink);font:700 28px var(--f-body)}
+[data-skin="neon"] .grid{display:grid;grid-template-columns:1.35fr 1fr;gap:16px;padding-bottom:40px}
+[data-skin="neon"] .p{background:#151715;border:1px solid var(--line);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;padding-bottom:22px;transition:border-color .2s}
+[data-skin="neon"] .p:hover{border-color:var(--acc)}
+[data-skin="neon"] .p:first-child{grid-row:span 2}
+[data-skin="neon"] .vis{position:relative;height:200px;background:radial-gradient(120% 100% at 70% 0%,color-mix(in srgb,var(--c) 45%,#0c0d0c),#111311 70%)}
+[data-skin="neon"] .p:first-child .vis{height:auto;flex:1;min-height:300px}
+[data-skin="neon"] .vis svg.flat{display:none}
+[data-skin="neon"] .vis svg{position:absolute;inset:0;width:100%;height:100%}
+[data-skin="neon"] .vis .st{position:absolute;top:16px;left:16px;font:500 11px var(--f-mono);padding:6px 10px;border-radius:99px;background:rgba(12,13,12,.75);border:1px solid var(--line)}
+[data-skin="neon"] .vis .st:before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--acc);margin-right:7px}
+[data-skin="neon"] .num{display:none}
+[data-skin="neon"] h2{margin:20px 22px 6px;font-size:28px;letter-spacing:-.03em}
+[data-skin="neon"] .desc{margin:0 22px;color:var(--mut);font-size:14.5px}
+[data-skin="neon"] .meta{margin:12px 22px 14px;font:500 11.5px var(--f-mono);color:var(--mut)}
+[data-skin="neon"] .meta .st,[data-skin="neon"] .meta br{display:none}
+[data-skin="neon"] .links{margin:0 22px}
+[data-skin="neon"] .btn{padding:9px 15px;border-radius:99px;border:1px solid var(--line)}
+[data-skin="neon"] .btn.pr{background:var(--acc);color:#0c0d0c;border-color:var(--acc)}
+[data-skin="neon"] footer{border-top:1px solid var(--line)}
+
+/* ===== Bunt ===== */
+[data-skin="bunt"]{--bg:#fbf8f3;--ink:#1d1b2e;--mut:#6b6880;--line:#d9d4e6;--chip:#fff;--acc:#9333ea;--f-body:'Bricolage Grotesque',sans-serif;--f-mono:'Bricolage Grotesque',sans-serif}
+[data-skin="bunt"] .logo{font-size:21px;font-weight:800}
+[data-skin="bunt"] .logo b{width:30px;height:30px;border-radius:10px;background:conic-gradient(from 200deg,#22c55e,#06b6d4,#a855f7,#f97316,#22c55e);color:transparent;font-size:0}
+[data-skin="bunt"] .skins{border:1.5px solid var(--ink);box-shadow:2px 2px 0 var(--ink)}
+[data-skin="bunt"] .skins button{font-weight:600}
+[data-skin="bunt"] .blobs{display:block;position:absolute;inset:0;overflow:hidden;z-index:0;pointer-events:none}
+.blobs i{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5}
+[data-skin="bunt"] .hero-bunt{display:block;text-align:center;padding:clamp(36px,6vw,64px) 0 40px}
+.hero-bunt .k{display:inline-block;background:#fff;border:1.5px solid var(--ink);border-radius:99px;padding:6px 14px;font-weight:600;font-size:13px;box-shadow:3px 3px 0 var(--ink)}
+.hero-bunt h1{font-size:clamp(46px,8vw,96px);line-height:.95;font-weight:800;letter-spacing:-.045em;margin:22px 0 16px}
+.hero-bunt h1 span{background:linear-gradient(90deg,#16a34a,#0891b2 50%,#9333ea);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-bunt p{max-width:540px;margin:0 auto;color:var(--mut);font-size:18px}
+[data-skin="bunt"] .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;padding:24px 0 56px}
+[data-skin="bunt"] .p{border-radius:30px;padding:10px 10px 18px;background:#fff;border:1.5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);display:flex;flex-direction:column;transition:transform .2s}
+[data-skin="bunt"] .p:nth-child(odd){transform:rotate(-.7deg)}
+[data-skin="bunt"] .p:nth-child(even){transform:rotate(.6deg)}
+[data-skin="bunt"] .p:hover{transform:translateY(-4px) rotate(0)}
+[data-skin="bunt"] .vis{height:220px;border-radius:22px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(160deg,color-mix(in srgb,var(--c) 35%,#fff),var(--c))}
+[data-skin="bunt"] .vis svg.line{display:none}
+[data-skin="bunt"] .vis svg.flat{width:70%;height:70%}
+[data-skin="bunt"] .vis .st{position:absolute;top:14px;right:14px;background:#fff;border:1.5px solid var(--ink);border-radius:99px;padding:4px 11px;font-size:12px;font-weight:700;transform:rotate(4deg)}
+[data-skin="bunt"] .num{display:none}
+[data-skin="bunt"] h2{margin:18px 14px 6px;font-size:30px;font-weight:800;letter-spacing:-.03em}
+[data-skin="bunt"] .desc{margin:0 14px;color:var(--mut);font-size:15px}
+[data-skin="bunt"] .meta{margin:14px;display:flex;flex-wrap:wrap;gap:6px}
+[data-skin="bunt"] .meta .st,[data-skin="bunt"] .meta br,[data-skin="bunt"] .meta .sep{display:none}
+[data-skin="bunt"] .meta .tags{display:contents}
+[data-skin="bunt"] .meta .tag{font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:#f1eef8}
+[data-skin="bunt"] .links{margin:auto 14px 0}
+[data-skin="bunt"] .btn{flex:1;padding:11px;border-radius:14px;border:1.5px solid var(--ink)}
+[data-skin="bunt"] .btn.pr{background:var(--ink);color:#fff}
+[data-skin="bunt"] footer{justify-content:center}
+
+/* ===== Handy ===== */
+@media (max-width:820px){
+  .gh{display:none}
+  [data-skin="feld"] .hero-feld,[data-skin="neon"] .hero-neon{grid-template-columns:1fr;gap:20px}
+  [data-skin="feld"] .p{grid-template-columns:56px 1fr;gap:10px 16px;padding:22px 6px}
+  [data-skin="feld"] .num{width:52px;height:52px;font-size:26px}
+  [data-skin="feld"] .desc,[data-skin="feld"] .meta,[data-skin="feld"] .links{grid-column:2}
+  [data-skin="feld"] .links{justify-content:flex-start}
+  [data-skin="neon"] .grid{grid-template-columns:1fr}
+  [data-skin="neon"] .p:first-child .vis{min-height:240px}
+}
+@media (max-width:520px){
+  .logo span{display:none}
+  [data-skin="neon"] .logo b{display:block;width:10px;height:10px;border-radius:50%;background:var(--acc);font-size:0}
+  [data-skin="neon"] .logo:after{display:none}
+  .skins button span{display:none}
+  .skins button{padding:9px 11px}
+  .skins button i{width:12px;height:12px}
+}
 </style>
 </head>
 <body>
-<header>
-  <div class="wrap">
-    <div class="kicker">bunwichtig</div>
-    <h1>Projekte &amp; Experimente</h1>
-    <p class="lead">Natur, Fotografie und Web. Hier sammle ich, woran ich gerade baue – meist reines HTML und JavaScript, mit Daten aus offenen Quellen.</p>
-  </div>
-</header>
+<div class="wrap">
+  <div class="blobs" aria-hidden="true"><i style="width:420px;height:420px;background:#86efac;left:-140px;top:60px"></i><i style="width:380px;height:380px;background:#c4b5fd;right:-120px;top:0"></i><i style="width:360px;height:360px;background:#fdba74;left:40%;top:460px"></i></div>
 
-<main class="wrap">
-  <div class="toolbar" id="filters" role="group" aria-label="Filter"></div>
-  <div class="grid" id="grid"></div>
-</main>
+  <nav>
+    <a class="logo" href="./"><b>b</b><span>bunwichtig</span></a>
+    <div class="nav-r">
+      <div class="skins" role="group" aria-label="Design wählen">
+        <button type="button" data-s="feld" title="Feldbuch"><i style="background:#ff4d2e"></i><span>Feldbuch</span></button>
+        <button type="button" data-s="neon" title="Neon"><i style="background:#d4ff3a;box-shadow:inset 0 0 0 1px #0003"></i><span>Neon</span></button>
+        <button type="button" data-s="bunt" title="Bunt"><i style="background:conic-gradient(#22c55e,#06b6d4,#a855f7,#f97316,#22c55e)"></i><span>Bunt</span></button>
+      </div>
+      <a class="gh" href="https://github.com/bunwichtig">GitHub ↗</a>
+    </div>
+  </nav>
 
-<footer class="wrap">
-  <span><a class="hint" href="https://bunwichtig.github.io/architektur-onepager/" title="Architektur" aria-label="Architektur">◇</a>© <span id="year"></span> bunwichtig · <a href="https://github.com/bunwichtig">GitHub</a></span>
-  <button class="theme" id="theme" type="button">Hell / Dunkel</button>
-</footer>
+  <header class="hero hero-feld">
+    <h1>Feldnotizen<br>aus dem <em>Browser</em><span class="dot">.</span></h1>
+    <div>
+      <p>Kleine Webprojekte über Natur und Landschaft – gebaut mit HTML, JavaScript und offenen Daten. Kein Server, keine Datenbank, alles nachvollziehbar.</p>
+      <div class="stickers"><span>offene Daten</span><span>reines JS</span><span>fürs Handy</span></div>
+    </div>
+  </header>
+
+  <header class="hero hero-neon">
+    <h1>Natur,<br>Daten &amp;<br><span>Code.</span></h1>
+    <div>
+      <p>Experimente im Browser – 3D-Landschaften, Artenwissen und ein Foto-Spiel. Alles reines HTML &amp; JavaScript, gespeist aus offenen Quellen.</p>
+      <div class="stat"><div><b id="count">0</b>Projekte</div><div><b>100%</b>offene Daten</div><div><b>0</b>Server</div></div>
+    </div>
+  </header>
+
+  <header class="hero hero-bunt">
+    <span class="k">🌱 Natur · Daten · Code</span>
+    <h1>Ich baue kleine<br><span>Natur-Welten</span> im Web.</h1>
+    <p>3D-Landschaften, Artenwissen und ein Foto-Spiel – reines HTML &amp; JavaScript, ohne Server.</p>
+  </header>
+
+  <div class="marquee" aria-hidden="true"><div id="marquee"></div></div>
+
+  <main class="grid" id="grid"></main>
+
+  <footer>
+    <span><a class="hint" href="https://bunwichtig.github.io/architektur-onepager/" title="Architektur" aria-label="Architektur">◇</a>© <span id="year"></span> bunwichtig</span>
+    <a href="https://github.com/bunwichtig">github.com/bunwichtig ↗</a>
+  </footer>
+</div>
 
 <script>
 /* ── Projekte hier pflegen ──────────────────────────────
    Neues Projekt = neuer Eintrag. Felder:
-   title, text, emoji, color (Hintergrund der Kachel),
+   title, text, color (Projektfarbe), art (Bildmotiv: walk | map | cam | leaf),
    status, tags, live (Link zur Seite), repo (GitHub-Link)  */
 const PROJECTS = [
   {
     title: "Pinnow Walk",
-    text: "Begehbares 3D-Modell einer Seeuferlandschaft bei Pinnow im Browser: Gelände, Stege, Gebäude und Bäume aus offenen Geodaten von M-V. Mit Maus und Tastatur oder per Wischen am Handy erkunden, Flugmodus inklusive.",
-    emoji: "🏡",
-    color: "linear-gradient(135deg,#3b6e8f,#9cc7c9)",
+    text: "Begehbares 3D-Modell einer Seeuferlandschaft bei Pinnow: Gelände, Stege, Gebäude und Bäume aus offenen Geodaten von M-V. Mit Maus und Tastatur oder per Wischen am Handy erkunden.",
+    color: "#2563eb",
+    art: "walk",
     status: "In Arbeit",
-    tags: ["3D", "three.js", "Geodaten", "Mobil"],
+    tags: ["3D", "three.js", "Geodaten"],
     live: "https://bunwichtig.github.io/pinnowwalk/",
     repo: "https://github.com/bunwichtig/pinnowwalk"
   },
   {
     title: "Pure Nature",
-    text: "Ort suchen und sehen, welche Pflanzen, Tiere und Pilze dort vorkommen – mit Steckbriefen, anklickbarem Verbreitungsgebiet und einer Seite mit allen freien Datenquellen. Fürs Handy gebaut, speichert nichts selbst: alles live aus offenen APIs.",
-    emoji: "🌍",
-    color: "linear-gradient(135deg,#2f6b45,#7fb6a0)",
+    text: "Ort suchen und sehen, welche Pflanzen, Tiere und Pilze dort vorkommen – mit Steckbriefen, Verbreitungsgebiet und einer Seite mit allen freien Datenquellen. Live aus offenen APIs.",
+    color: "#16a34a",
+    art: "map",
     status: "In Arbeit",
-    tags: ["Karte", "GBIF", "iNaturalist", "Wissen", "Mobil"],
+    tags: ["Karte", "GBIF", "iNaturalist"],
     live: "https://bunwichtig.github.io/naturewissen/",
     repo: "https://github.com/bunwichtig/naturewissen"
   },
   {
-    title: "Nature – BioDex MMO",
-    text: "Prototyp eines Natur-Foto-Spiels: Tiere und Pflanzen fotografieren, bestimmen lassen, im Natur-Kodex sammeln, Medaillen freischalten und Funde anderer im Community-Hub bestätigen.",
-    emoji: "📸",
-    color: "linear-gradient(135deg,#c98b3a,#e9c98f)",
+    title: "Nature – BioDex",
+    text: "Prototyp eines Natur-Foto-Spiels: Tiere und Pflanzen fotografieren, bestimmen lassen, im Natur-Kodex sammeln und Medaillen freischalten.",
+    color: "#f97316",
+    art: "cam",
     status: "Prototyp",
-    tags: ["Spiel", "Fotografie", "Tailwind"],
+    tags: ["Spiel", "Fotografie"],
     live: "https://bunwichtig.github.io/nature/",
     repo: "https://github.com/bunwichtig/nature"
   }
 ];
 /* ─────────────────────────────────────────────────────── */
 
-const grid = document.getElementById('grid');
-const filters = document.getElementById('filters');
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-let active = 'Alle';
 
-function render(){
-  const list = active === 'Alle' ? PROJECTS : PROJECTS.filter(p => p.tags.includes(active));
-  grid.innerHTML = list.length ? list.map(p => `
-    <article class="card">
-      <div class="cover" style="background:${p.color}"><span class="status">${esc(p.status)}</span><span aria-hidden="true">${p.emoji}</span></div>
-      <div class="body">
-        <h2>${esc(p.title)}</h2>
-        <p>${esc(p.text)}</p>
-        <div class="tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('')}</div>
-        <div class="links">
-          ${p.live ? `<a class="btn primary" href="${p.live}">Ansehen</a>` : ''}
-          ${p.repo ? `<a class="btn" href="${p.repo}">Code</a>` : ''}
-        </div>
-      </div>
-    </article>`).join('') : '<p class="empty">Keine Projekte mit diesem Schlagwort.</p>';
-}
+const LINE = {
+  walk: `<svg class="line" viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#d4ff3a" stroke-opacity=".55" stroke-width="1.2"><path d="M0 280 C120 230 200 260 300 220 S480 190 600 230"/><path d="M0 300 C120 255 210 280 300 245 S480 215 600 252"/><path d="M0 320 C120 280 220 300 300 270 S480 242 600 275"/><path d="M0 342 C130 305 230 322 310 296 S480 270 600 298"/><path d="M0 365 C130 332 240 345 320 322 S480 298 600 322"/><path d="M0 388 C130 360 250 370 330 350 S490 328 600 348"/></g><g fill="none" stroke="#9cc7c9" stroke-opacity=".35"><path d="M0 250 C140 200 200 230 290 190 S470 150 600 200"/><path d="M0 220 C140 175 210 195 280 160 S460 120 600 170"/></g><rect x="250" y="230" width="56" height="34" fill="#151715" stroke="#f1f3ee" stroke-opacity=".7"/><path d="M246 232 L278 208 L310 232" fill="none" stroke="#f1f3ee" stroke-opacity=".7"/><line x1="330" y1="272" x2="390" y2="280" stroke="#f1f3ee" stroke-opacity=".5" stroke-width="3"/><g fill="#d4ff3a" fill-opacity=".8"><circle cx="160" cy="242" r="5"/><circle cx="190" cy="230" r="7"/><circle cx="420" cy="212" r="6"/><circle cx="460" cy="220" r="8"/></g></svg>`,
+  map: `<svg class="line" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#d4ff3a" stroke-opacity=".4"><circle cx="230" cy="110" r="22"/><circle cx="230" cy="110" r="46"/><circle cx="230" cy="110" r="74"/></g><circle cx="230" cy="110" r="6" fill="#d4ff3a"/><g fill="#f1f3ee" fill-opacity=".6"><circle cx="190" cy="80" r="3"/><circle cx="270" cy="140" r="3"/><circle cx="300" cy="90" r="3"/><circle cx="170" cy="150" r="3"/><circle cx="250" cy="60" r="3"/></g></svg>`,
+  cam: `<svg class="line" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#f1c27a" stroke-opacity=".7" stroke-width="2"><path d="M160 70 h-22 v22 M240 70 h22 v22 M160 150 h-22 v-22 M240 150 h22 v-22"/></g><circle cx="200" cy="110" r="16" fill="none" stroke="#d4ff3a" stroke-opacity=".8"/><circle cx="200" cy="110" r="3" fill="#d4ff3a"/></svg>`,
+  leaf: `<svg class="line" viewBox="0 0 400 200" preserveAspectRatio="xMidYMid slice"><path d="M200 160 C200 110 170 80 140 70 C180 60 200 90 200 120 C200 90 230 55 270 60 C240 75 200 105 200 160Z" fill="none" stroke="#d4ff3a" stroke-opacity=".7" stroke-width="1.5"/></svg>`
+};
+const FLAT = {
+  walk: `<svg class="flat" viewBox="0 0 200 140"><path d="M0 100 Q50 70 100 85 T200 75 V140 H0Z" fill="#166534"/><path d="M0 115 Q60 95 120 108 T200 100 V140 H0Z" fill="#22c55e"/><rect x="80" y="62" width="34" height="24" fill="#fff" stroke="#1d1b2e" stroke-width="3"/><path d="M76 64 L97 46 L118 64Z" fill="#f97316" stroke="#1d1b2e" stroke-width="3"/><circle cx="40" cy="80" r="14" fill="#15803d" stroke="#1d1b2e" stroke-width="3"/><circle cx="160" cy="72" r="16" fill="#15803d" stroke="#1d1b2e" stroke-width="3"/><circle cx="160" cy="30" r="12" fill="#fde047"/></svg>`,
+  map: `<svg class="flat" viewBox="0 0 200 140"><path d="M100 14 C70 14 50 36 50 62 C50 94 100 124 100 124 C100 124 150 94 150 62 C150 36 130 14 100 14Z" fill="#fff" stroke="#1d1b2e" stroke-width="3"/><path d="M100 86 C100 66 85 54 78 51 C90 48 100 56 100 68 C100 56 112 46 124 48 C116 54 100 64 100 86Z" fill="#16a34a" stroke="#1d1b2e" stroke-width="2.5"/></svg>`,
+  cam: `<svg class="flat" viewBox="0 0 200 140"><rect x="45" y="40" width="110" height="74" rx="14" fill="#fff" stroke="#1d1b2e" stroke-width="3"/><rect x="70" y="30" width="34" height="14" rx="4" fill="#fff" stroke="#1d1b2e" stroke-width="3"/><circle cx="100" cy="77" r="24" fill="#a855f7" stroke="#1d1b2e" stroke-width="3"/><circle cx="100" cy="77" r="10" fill="#1d1b2e"/><circle cx="94" cy="71" r="4" fill="#fff"/></svg>`,
+  leaf: `<svg class="flat" viewBox="0 0 200 140"><path d="M100 120 C100 70 70 40 40 30 C80 20 100 50 100 80 C100 50 130 15 170 20 C140 35 100 65 100 120Z" fill="#22c55e" stroke="#1d1b2e" stroke-width="3"/></svg>`
+};
 
-function renderFilters(){
-  const tags = ['Alle', ...new Set(PROJECTS.flatMap(p => p.tags))];
-  filters.innerHTML = tags.map(t => `<button class="filter" type="button" aria-pressed="${t===active}">${esc(t)}</button>`).join('');
-  filters.querySelectorAll('button').forEach(b => b.onclick = () => { active = b.textContent; renderFilters(); render(); });
-}
+document.getElementById('grid').innerHTML = PROJECTS.map((p, i) => {
+  const art = p.art || 'leaf';
+  return `
+  <article class="p" style="--c:${esc(p.color || '#16a34a')}">
+    <div class="vis">${LINE[art] || LINE.leaf}${FLAT[art] || FLAT.leaf}<span class="st">${esc(p.status)}</span></div>
+    <span class="num">${String(i + 1).padStart(2, '0')}</span>
+    <h2>${esc(p.title)}</h2>
+    <p class="desc">${esc(p.text)}</p>
+    <div class="meta"><span class="st">${esc(p.status)}</span><br><span class="tags">${p.tags.map(t => `<span class="tag">${esc(t)}</span>`).join('<span class="sep"> · </span>')}</span></div>
+    <div class="links">
+      ${p.live ? `<a class="btn pr" href="${esc(p.live)}">Ansehen ↗</a>` : ''}
+      ${p.repo ? `<a class="btn" href="${esc(p.repo)}">Code</a>` : ''}
+    </div>
+  </article>`;
+}).join('');
 
-renderFilters(); render();
+const words = PROJECTS.flatMap(p => [p.title, ...p.tags]);
+const run = words.map(w => PROJECTS.some(p => p.title === w) ? `<b>✦ ${esc(w)}</b>` : `<span>${esc(w)}</span>`).join('');
+document.getElementById('marquee').innerHTML = run + run + run + run;
+document.getElementById('count').textContent = String(PROJECTS.length).padStart(2, '0');
 document.getElementById('year').textContent = new Date().getFullYear();
 
 const root = document.documentElement;
-try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch(e){}
-document.getElementById('theme').onclick = () => {
-  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-  root.dataset.theme = dark ? 'light' : 'dark';
-  try { localStorage.setItem('theme', root.dataset.theme); } catch(e){}
-};
+const btns = document.querySelectorAll('.skins button');
+function setSkin(s){
+  if (!['feld','neon','bunt'].includes(s)) s = 'feld';
+  root.dataset.skin = s;
+  btns.forEach(b => b.setAttribute('aria-pressed', b.dataset.s === s));
+  try { localStorage.setItem('skin', s); } catch(e){}
+}
+btns.forEach(b => b.onclick = () => setSkin(b.dataset.s));
+setSkin(root.dataset.skin);
 </script>
 </body>
 </html>
