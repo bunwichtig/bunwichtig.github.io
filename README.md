@@ -29,7 +29,7 @@ Oben gibt es sechs Ansichten zum Umschalten. Die Wahl merkt sich der Browser.
 ## Reihenfolge
 
 Projekte mit `natur: true` stehen immer oben. Ein Projekt ohne `live`-Link erscheint blass
-und ist nicht anklickbar (z. B. Star Trek, solange es noch nicht fertig ist).
+und ist nicht anklickbar (z. B. „Unbekanntes Signal“, solange es noch nicht fertig ist).
 
 ## Veröffentlichen
 
