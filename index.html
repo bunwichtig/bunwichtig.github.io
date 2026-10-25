@@ -51,6 +51,8 @@
   footer{border-top:1px solid var(--line);padding:24px 0 40px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
   .theme{background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer}
   .empty{color:var(--muted);grid-column:1/-1}
+  .hint{color:var(--muted);text-decoration:none;opacity:.12;margin-right:10px;font-size:12px;transition:opacity .3s}
+  .hint:hover,.hint:focus-visible{opacity:.7}
 </style>
 </head>
 <body>
@@ -68,7 +70,7 @@
 </main>
 
 <footer class="wrap">
-  <span>© <span id="year"></span> bunwichtig · <a href="https://github.com/bunwichtig">GitHub</a></span>
+  <span><a class="hint" href="https://bunwichtig.github.io/architektur-onepager/" title="Architektur" aria-label="Architektur">◇</a>© <span id="year"></span> bunwichtig · <a href="https://github.com/bunwichtig">GitHub</a></span>
   <button class="theme" id="theme" type="button">Hell / Dunkel</button>
 </footer>
 
@@ -80,11 +82,11 @@
 const PROJECTS = [
   {
     title: "Pure Nature",
-    text: "Drehbarer 3D-Globus, der zeigt, welche Pflanzen, Tiere und Pilze im sichtbaren Ausschnitt vorkommen. Mit Steckbriefen und Pflanzenbestimmung per Handy-Foto. Speichert nichts selbst – alles live aus freien APIs.",
+    text: "Ort suchen und sehen, welche Pflanzen, Tiere und Pilze dort vorkommen – mit Steckbriefen, anklickbarem Verbreitungsgebiet und einer Seite mit allen freien Datenquellen. Fürs Handy gebaut, speichert nichts selbst: alles live aus offenen APIs.",
     emoji: "🌍",
     color: "linear-gradient(135deg,#2f6b45,#7fb6a0)",
     status: "In Arbeit",
-    tags: ["Globus", "GBIF", "iNaturalist", "Pl@ntNet", "Wissen"],
+    tags: ["Karte", "GBIF", "iNaturalist", "Wissen", "Mobil"],
     live: "https://bunwichtig.github.io/naturewissen/",
     repo: "https://github.com/bunwichtig/naturewissen"
   },
