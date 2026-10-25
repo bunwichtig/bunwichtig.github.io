@@ -21,8 +21,15 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
 
 ## Ansichten
 
-Oben rechts gibt es drei Ansichten zum Umschalten: **Feldbuch** (Standard), **Nacht** und **Kalk**.
-Sie unterscheiden sich nur in Farben und Schrift; die Wahl merkt sich der Browser.
+Oben gibt es sechs Ansichten zum Umschalten. Die Wahl merkt sich der Browser.
+
+- **Flach:** Feldbuch (Standard), Nacht, Kalk
+- **Plastisch:** Moos, Ton, Tiefsee – erhabene Karten mit weichen Schatten
+
+## Reihenfolge
+
+Projekte mit `natur: true` stehen immer oben. Ein Projekt ohne `live`-Link erscheint blass
+und ist nicht anklickbar (z. B. Star Trek, solange es noch nicht fertig ist).
 
 ## Veröffentlichen
 
