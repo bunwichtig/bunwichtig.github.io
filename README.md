@@ -25,7 +25,7 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
 
 Projekte mit `gross: true` stehen ganz vorne, danach die mit `natur: true`, sonst gilt die
 Reihenfolge der Liste. Das Projekt mit `size: "big"` ist in jeder Optik das Hauptprojekt
-(zurzeit Funkenfeld). Ein Projekt ohne `live`-Link erscheint blass und ist nicht anklickbar.
+(zurzeit BombRe). Ein Projekt ohne `live`-Link erscheint blass und ist nicht anklickbar.
 
 ## Optiken und Farben
 
