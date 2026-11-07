@@ -378,8 +378,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
    Ohne live-Link gilt ein Projekt als „noch nicht verfügbar“ (blasser, nicht anklickbar).  */
 const PROJECTS = [
   {
-    title: "Funkenfeld",
-    em: "feld",
+    title: "BombRe",
+    em: "Re",
     gross: true,
     size: "big",
     text: "Eigenes Bomben-Arena-Spiel für 2 bis 6 Leute direkt im Browser: Raum mit Passwort anlegen, Link schicken, losspielen. Klassisch oder individuell mit Mega-Items, Fernzünder, Sound und Rangliste.",
@@ -460,7 +460,7 @@ const cls = p => p.live ? 'link' : 'soon';
 const sty = p => `style="--c:${esc(p.color || '#777')}"`;
 const n2 = i => String(i + 1).padStart(2, '0');
 
-/* Spielfeld-Motiv für Funkenfeld: Raster mit festen Blöcken, Kisten, Bombe, Flammenkreuz, Figuren */
+/* Spielfeld-Motiv für BombRe: Raster mit festen Blöcken, Kisten, Bombe, Flammenkreuz, Figuren */
 function gameArt(){
   const c = 26, cols = 11, rows = 7, ox = 3, oy = 3;
   const cx = x => ox + x * c + c / 2, cy = y => oy + y * c + c / 2;
