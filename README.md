@@ -9,6 +9,7 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
 ```js
 {
   title: "Name",
+  kat: "spiele",             // Kategorie: "spiele" oder "daten"
   em: "me",                  // optional: kursiver Teil des Namens
   text: "Kurze Beschreibung",
   color: "#16a34a",          // Projektfarbe
@@ -20,6 +21,12 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
   repo: "https://github.com/bunwichtig/repo-name"
 }
 ```
+
+## Kategorien
+
+Oben in der Navigation stehen **Alle · Spiele · Daten**. Jedes Projekt bekommt mit `kat` eine
+Kategorie. Die Auswahl steckt in der Adresse, direkt verlinken geht also auch:
+`bunwichtig.github.io/#spiele` oder `#daten`. Das klappt in jeder Optik.
 
 ## Reihenfolge
 
