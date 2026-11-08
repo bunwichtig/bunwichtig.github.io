@@ -24,34 +24,31 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
 
 ## Kategorien
 
-Oben in der Navigation stehen **Alle · Spiele · Daten**. Jedes Projekt bekommt mit `kat` eine
-Kategorie. Die Auswahl steckt in der Adresse, direkt verlinken geht also auch:
-`bunwichtig.github.io/#spiele` oder `#daten`. Das klappt in jeder Optik.
+Oben in der Mitte sitzt ein Umschalter **Alle · Spiele · Daten** mit der Zahl der Projekte. Jedes Projekt
+bekommt mit `kat` eine Kategorie. Die Auswahl steckt in der Adresse, direkt verlinken geht also auch:
+`bunwichtig.github.io/#spiele` oder `#daten`. Das klappt in jedem Design.
 
 ## Reihenfolge
 
 Projekte mit `gross: true` stehen ganz vorne, danach die mit `natur: true`, sonst gilt die
-Reihenfolge der Liste. Das Projekt mit `size: "big"` ist in jeder Optik das Hauptprojekt
+Reihenfolge der Liste. Das Projekt mit `size: "big"` ist in jedem Design das Hauptprojekt
 (zurzeit Funkenfeld). Ein Projekt ohne `live`-Link erscheint blass und ist nicht anklickbar.
 
-## Optiken und Farben
+## Designs 1–6
 
-Unten rechts sitzt ein kleiner runder Knopf. Darüber lässt sich die Optik wählen, der Browser merkt sich die Wahl.
+Oben rechts stehen die Knöpfe **1 2 3 4 5 6** (am Rechner gehen auch die Tasten 1–6).
+Der Browser merkt sich die Wahl.
 
-| Optik | Art |
-|---|---|
-| Bento (Standard) | Kachel-Raster, Hauptprojekt groß |
-| Bühne | großer Auftritt fürs Hauptprojekt, darunter eine Reihe Karten |
-| Feldbuch | nummerierte Liste wie die frühere Startseite |
-| Neon-Arcade | dunkel, Neonleuchten, Pixelschrift (eigene Farben) |
-| Magazin | Titelblatt mit Titelgeschichte (eigene Schrift) |
-| Terminal | Projekte als Kommandozeile (eigene Farben) |
-| Pinnwand | Zettel auf Kork (eigene Farben) |
+| Nr. | Design | Art |
+|---|---|---|
+| 1 | Bento (Standard) | hell und klar, Kachel-Raster, Hauptprojekt groß |
+| 2 | Aurora | dunkel, Farbverlauf-Leuchten, Glas-Karten |
+| 3 | Brutal | kräftige Farben, dicke Rahmen, harte Schatten |
+| 4 | Swiss | große Schrift, nummerierte Liste, eine Akzentfarbe |
+| 5 | Glas | Pastell-Verläufe, mattes Glas, Zahlen auf einen Blick |
+| 6 | Bühne | dunkel, Hauptprojekt in seiner Farbe, Karten zum Wischen |
 
-Bento, Bühne, Feldbuch und Magazin lassen sich zusätzlich mit sechs Farben kombinieren:
-Feldbuch, Nacht, Kalk (flach) sowie Moos, Ton, Tiefsee (plastisch, mit weichen Schatten).
-
-Direkt verlinken geht auch: `?optik=neon` oder `?optik=bento&farbe=tiefsee`.
+Direkt verlinken geht auch: `?design=4` oder `?design=2#spiele`.
 
 ## Veröffentlichen
 
