@@ -352,7 +352,7 @@ footer a:hover{color:var(--ink)}
 /* ── Projekte hier pflegen ──────────────────────────────
    Neues Projekt = neuer Eintrag. Felder:
    title, em (kursiver Teil des Namens, optional), text, color (Projektfarbe),
-   art (Bild: walk | map | cam | signal | leaf | game),
+   art (Bild: walk | map | cam | signal | leaf | game | krater),
    status, tags, live (Link zur Seite), repo (GitHub-Link),
    size: "big" (Hauptprojekt, groß) | "wide" (im Bento doppelt breit) | weglassen
    gross: true  → steht ganz vorne, natur: true → danach (Reihenfolge sonst wie hier)
@@ -400,6 +400,17 @@ const PROJECTS = [
     tags: ["Spiel", "Fotografie"],
     live: "https://bunwichtig.github.io/nature/",
     repo: "https://github.com/bunwichtig/nature"
+  },
+  {
+    title: "Krater",
+    kat: "spiele",
+    text: "Rundenbasiertes Artillerie-Spiel für 2 bis 4 Teams kleiner Pilze: zerstörbares Gelände mit Höhlen, Wind und fünf Waffen. Online ohne eigenen Server oder alle zusammen an einem Gerät.",
+    color: "#8b5cf6",
+    art: "krater",
+    status: "In Arbeit",
+    tags: ["Spiel", "Mehrspieler", "PeerJS"],
+    live: "https://bunwichtig.github.io/w1/",
+    repo: "https://github.com/bunwichtig/w1"
   },
   {
     title: "Pinnow Walk",
@@ -474,6 +485,7 @@ const ART = {
   map:  '<svg viewBox="0 0 120 84" fill="none"><circle class="a" cx="60" cy="42" r="10"/><circle class="a" cx="60" cy="42" r="22" stroke-opacity=".6"/><circle class="a" cx="60" cy="42" r="34" stroke-opacity=".3"/><circle class="f" cx="60" cy="42" r="3"/></svg>',
   cam:  '<svg viewBox="0 0 120 84" fill="none" stroke-width="1.2"><path class="i" d="M42 26 h-8 v8 M78 26 h8 v8 M42 58 h-8 v-8 M78 58 h8 v-8"/><circle class="a" cx="60" cy="42" r="8"/><circle class="f" cx="60" cy="42" r="2"/></svg>',
   signal: '<svg viewBox="0 0 120 84" fill="none" stroke-linecap="round"><circle class="f" cx="40" cy="42" r="2.6"/><path class="a" d="M47 34 A11 11 0 0 1 47 50" stroke-width="1.3"/><path class="a" d="M54 26 A22 22 0 0 1 54 58" stroke-width="1.2" stroke-opacity=".7"/><path class="a" d="M61 18 A33 33 0 0 1 61 66" stroke-width="1.1" stroke-opacity=".45"/><path class="a" d="M68 10 A44 44 0 0 1 68 74" stroke-opacity=".25"/></svg>',
+  krater: '<svg viewBox="0 0 120 84" fill="none" stroke-linecap="round"><path class="a" d="M22 54 Q44 10 74 48" stroke-dasharray="2 4" stroke-width="1.3"/><path class="i" d="M0 66 C14 60 22 58 30 60 C40 62 46 60 54 62 C60 64 62 72 70 72 C78 72 80 62 88 60 C100 58 110 62 120 58"/><path class="i" d="M30 60 v-6 M26 54 a4 3 0 0 1 8 0z" stroke-width="1.2"/><circle class="f" cx="74" cy="48" r="2.4"/><path class="a" d="M70 44 l-3 -3 M78 44 l3 -3 M74 42 v-4" stroke-width="1.1"/></svg>',
   leaf: '<svg viewBox="0 0 120 84" fill="none"><path class="a" d="M60 70 C60 46 46 32 32 28 C52 24 60 38 60 52 C60 38 74 22 92 24 C78 32 60 46 60 70Z"/></svg>',
   game: gameArt()
 };

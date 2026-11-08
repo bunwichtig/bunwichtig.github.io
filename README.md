@@ -13,7 +13,7 @@ In `index.html` im Block `PROJECTS` einen Eintrag ergänzen:
   em: "me",                  // optional: kursiver Teil des Namens
   text: "Kurze Beschreibung",
   color: "#16a34a",          // Projektfarbe
-  art: "leaf",               // Bild: walk | map | cam | signal | leaf | game
+  art: "leaf",               // Bild: walk | map | cam | signal | leaf | game | krater
   status: "In Arbeit",
   tags: ["Schlagwort"],
   size: "wide",              // optional: "big" = Hauptprojekt, "wide" = im Bento doppelt breit
