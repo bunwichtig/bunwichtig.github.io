@@ -58,6 +58,9 @@ nav{display:flex;justify-content:space-between;align-items:center;gap:16px;paddi
 .logo i{font:italic 400 22px/1 'Instrument Serif',Georgia,serif;width:32px;height:32px;display:grid;place-items:center;background:var(--ink);color:var(--inv);border-radius:9px;text-transform:none}
 .nav-r{display:flex;gap:22px;color:var(--mut)}
 .nav-r a:hover{color:var(--ink)}
+.nav-r a[aria-current="page"]{color:var(--ink);box-shadow:inset 0 -2px 0 var(--acc)}
+.kats{display:flex;gap:16px}
+.leer{padding:60px 0;color:var(--mut)}
 .cover{position:absolute;inset:0;z-index:1;border-radius:inherit}
 .cover:focus-visible{outline:2px solid var(--acc);outline-offset:-3px}
 .code{position:relative;z-index:2;border-bottom:1px solid currentColor;line-height:1.3;white-space:nowrap}
@@ -321,7 +324,8 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
   .tile.big,.tile.wide,.note.feat{grid-column:auto}
   .tile{padding:18px;border-radius:18px}
   .m-art{border-right:0;padding:20px 0}
-  .nav-r .opt{display:none}
+  nav{flex-wrap:wrap;gap:12px}
+  .nav-r{gap:14px}
   .logo{font-size:11px}
   .b-hero .count{font-size:44px}
   .term .ls{grid-template-columns:auto minmax(0,1fr)}
@@ -335,7 +339,7 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
 <div class="wrap">
   <nav>
     <a class="logo mono" href="./"><i>b</i>bunwichtig — Werkverzeichnis</a>
-    <div class="nav-r mono"><a class="opt" href="#projekte">Projekte</a><a href="https://github.com/bunwichtig">GitHub ↗</a></div>
+    <div class="nav-r mono"><span class="kats" id="kats"><a href="#alle">Alle</a><a href="#spiele">Spiele</a><a href="#daten">Daten</a></span><a href="https://github.com/bunwichtig">GitHub ↗</a></div>
   </nav>
 
   <main id="projekte"></main>
@@ -374,11 +378,13 @@ footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;paddin
    status, tags, live (Link zur Seite), repo (GitHub-Link),
    size: "big" (Hauptprojekt, groß) | "wide" (im Bento doppelt breit) | weglassen
    gross: true  → steht ganz vorne, natur: true → danach (Reihenfolge sonst wie hier)
+   kat: "spiele" | "daten"  → Kategorie oben in der Navigation
    cta: Text für den Knopf beim Hauptprojekt (optional)
    Ohne live-Link gilt ein Projekt als „noch nicht verfügbar“ (blasser, nicht anklickbar).  */
 const PROJECTS = [
   {
     title: "Funkenfeld",
+    kat: "spiele",
     em: "feld",
     gross: true,
     size: "big",
@@ -393,6 +399,7 @@ const PROJECTS = [
   },
   {
     title: "Pure Nature",
+    kat: "daten",
     natur: true,
     size: "wide",
     text: "Ort suchen und sehen, welche Pflanzen, Tiere und Pilze dort vorkommen – mit Steckbriefen, Verbreitungsgebiet und einer Seite mit allen freien Datenquellen. Live aus offenen APIs.",
@@ -405,6 +412,7 @@ const PROJECTS = [
   },
   {
     title: "Nature BioDex",
+    kat: "spiele",
     em: "BioDex",
     natur: true,
     text: "Prototyp eines Natur-Foto-Spiels: Tiere und Pflanzen fotografieren, bestimmen lassen, im Natur-Kodex sammeln und Medaillen freischalten.",
@@ -417,6 +425,7 @@ const PROJECTS = [
   },
   {
     title: "Pinnow Walk",
+    kat: "daten",
     text: "Begehbares 3D-Modell einer Seeuferlandschaft bei Pinnow: Gelände, Stege, Gebäude und Bäume aus offenen Geodaten von M-V. Mit Maus und Tastatur oder per Wischen am Handy erkunden.",
     color: "#3b6e8f",
     art: "walk",
@@ -427,6 +436,7 @@ const PROJECTS = [
   },
   {
     title: "Unbekanntes Signal",
+    kat: "daten",
     em: "Signal",
     text: "Von weit draußen kommt etwas herein. Was es ist, wird noch nicht verraten.",
     color: "#8a8f99",
@@ -493,9 +503,18 @@ ART.mapWide = ART.map.replace('viewBox="0 0 120 84"', 'viewBox="-60 0 240 84"').
 const art = (p, wide) => `<div class="art" aria-hidden="true">${(wide && p.art === 'map') ? ART.mapWide : (ART[p.art] || ART.leaf)}</div>`;
 
 const rank = p => p.gross ? 0 : p.natur ? 1 : 2;
-const LIST = PROJECTS.map((p, i) => ({ p, i })).sort((a, b) => rank(a.p) - rank(b.p) || a.i - b.i).map(x => x.p);
-const FEAT = LIST.find(p => p.size === 'big') || LIST[0];
-const REST = LIST.filter(p => p !== FEAT);
+const ALL = PROJECTS.map((p, i) => ({ p, i })).sort((a, b) => rank(a.p) - rank(b.p) || a.i - b.i).map(x => x.p);
+
+/* Kategorien: #spiele oder #daten in der Adresse zeigt nur diese Projekte */
+const KATS = { spiele: 'Spiele', daten: 'Daten' };
+let KAT = '', LIST = ALL, FEAT, REST;
+function filter(k) {
+  KAT = KATS[k] ? k : '';
+  LIST = KAT ? ALL.filter(p => p.kat === KAT) : ALL;
+  FEAT = LIST.find(p => p.size === 'big') || LIST[0];
+  REST = LIST.filter(p => p !== FEAT);
+}
+filter(location.hash.slice(1));
 const H1 = 'Feldnotizen<br>aus dem <em>Browser.</em>';
 const INTRO = 'Kleine Webprojekte über Natur, Landschaft und ab und zu ein Spiel – gebaut mit HTML, JavaScript und offenen Daten. Kein Server, keine Datenbank, alles nachvollziehbar.';
 const MONTH = new Date().toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
@@ -522,7 +541,7 @@ const RENDER = {
     };
     return `<div class="bento">
       <header class="tile big b-hero"><h1>${H1}</h1>
-        <div class="row"><p>${INTRO}</p><div class="count">${PROJECTS.length}<small>Projekte</small></div></div></header>
+        <div class="row"><p>${INTRO}</p><div class="count">${LIST.length}<small>${KAT ? KATS[KAT] : 'Projekte'}</small></div></div></header>
       ${LIST.map(t).join('')}
       <section class="tile wide gh link"><a class="cover" href="https://github.com/bunwichtig" aria-label="Alle Projekte auf GitHub"></a>
         <span class="go" aria-hidden="true">↗</span><h3>Quelltext</h3>
@@ -567,7 +586,7 @@ const RENDER = {
   magazin() {
     const p = FEAT, words = p.text.split(': ');
     return `<header class="m-mast"><h1>bunwich<em>tig</em></h1></header>
-      <div class="m-line mono"><span>Feldnotizen aus dem Browser</span><span>Ausgabe ${MONTH}</span><span>${PROJECTS.length} Projekte</span></div>
+      <div class="m-line mono"><span>Feldnotizen aus dem Browser</span><span>Ausgabe ${MONTH}</span><span>${LIST.length} ${KAT ? KATS[KAT] : 'Projekte'}</span></div>
       <article class="m-cover ${cls(p)}" ${sty(p)}>${cover(p, 'spielen')}${art(p)}
         <div><span class="mono kick">Titelgeschichte · ${esc(p.status)}</span><h2>${nm(p)}</h2>
           <p class="lede">${esc(words[0])}.</p><p class="body">${esc(words.slice(1).join(': ') || p.text)}</p>
@@ -610,6 +629,7 @@ const RENDER = {
 const root = document.documentElement, main = document.getElementById('projekte');
 const picker = document.getElementById('picker'), toggle = picker.querySelector(':scope>button');
 document.getElementById('looks').innerHTML = LOOKS.map(l => `<button type="button" data-l="${l.id}">${esc(l.name)}</button>`).join('');
+const kats = document.querySelectorAll('#kats a');
 const lookBtns = picker.querySelectorAll('[data-l]'), skinBtns = picker.querySelectorAll('[data-s]');
 
 function apply(look, skin) {
@@ -619,7 +639,8 @@ function apply(look, skin) {
   root.dataset.look = look;
   root.dataset.skin = skin;
   root.classList.toggle('plast', !L.fixed && ['moos','ton','tiefsee'].includes(skin));
-  main.innerHTML = RENDER[look]();
+  main.innerHTML = LIST.length ? RENDER[look]() : '<p class="leer mono">Hier ist noch nichts.</p>';
+  kats.forEach(a => a.hash.slice(1) === (KAT || 'alle') ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
   lookBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.l === look));
   skinBtns.forEach(b => b.setAttribute('aria-pressed', b.dataset.s === skin));
   document.getElementById('colors').classList.toggle('off', !!L.fixed);
@@ -632,6 +653,8 @@ const open = v => { picker.classList.toggle('open', v); toggle.setAttribute('ari
 toggle.onclick = e => { e.stopPropagation(); open(!picker.classList.contains('open')); };
 document.addEventListener('click', e => { if (!picker.contains(e.target)) open(false); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { open(false); toggle.focus(); } });
+
+addEventListener('hashchange', () => { filter(location.hash.slice(1)); apply(root.dataset.look, root.dataset.skin); });
 
 document.getElementById('year').textContent = new Date().getFullYear();
 apply(root.dataset.look, root.dataset.skin);
