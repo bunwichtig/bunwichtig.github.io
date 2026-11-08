@@ -41,12 +41,12 @@ Der Browser merkt sich die Wahl.
 
 | Nr. | Design | Art |
 |---|---|---|
-| 1 | Bento (Standard) | hell und klar, Kachel-Raster, Hauptprojekt groß |
+| 1 | Bento | hell und klar, Kachel-Raster, Hauptprojekt groß |
 | 2 | Aurora | dunkel, Farbverlauf-Leuchten, Glas-Karten |
 | 3 | Brutal | kräftige Farben, dicke Rahmen, harte Schatten |
 | 4 | Swiss | große Schrift, nummerierte Liste, eine Akzentfarbe |
 | 5 | Glas | Pastell-Verläufe, mattes Glas, Zahlen auf einen Blick |
-| 6 | Bühne | dunkel, Hauptprojekt in seiner Farbe, Karten zum Wischen |
+| 6 | Bühne (Standard) | dunkel, Hauptprojekt in seiner Farbe, Karten zum Wischen |
 
 Direkt verlinken geht auch: `?design=4` oder `?design=2#spiele`.
 

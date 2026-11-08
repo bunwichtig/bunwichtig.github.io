@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="de" data-v="1">
+<html lang="de" data-v="6">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -587,7 +587,7 @@ vs.insertAdjacentHTML('beforeend', Object.entries(DESIGNS).map(([v, n]) =>
 const katLinks = katNav.querySelectorAll('a'), vBtns = vs.querySelectorAll('button');
 
 function apply(v) {
-  if (!RENDER[v]) v = '1';
+  if (!RENDER[v]) v = '6';
   root.dataset.v = v;
   main.innerHTML = LIST.length ? RENDER[v]() : '<p class="leer mono">Hier ist noch nichts.</p>';
   katLinks.forEach(a => a.hash.slice(1) === (KAT || 'alle') ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
